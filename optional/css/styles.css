@@ -1,0 +1,456 @@
+:root {
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --bg: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.6);
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --accent: #c084fc;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Outfit', sans-serif;
+    background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+header {
+    text-align: center;
+}
+
+h1 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0;
+    background: linear-gradient(to right, #818cf8, #c084fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Video Grid Styles */
+.video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.video-wrapper {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+}
+
+.video-wrapper span {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #fff;
+    backdrop-filter: blur(8px);
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #000;
+}
+
+/* Controls & Sections */
+.controls {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    padding: 28px;
+    border-radius: 32px;
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-lg);
+}
+
+.chat-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+}
+
+label {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 250px;
+    max-height: 400px;
+}
+
+.message {
+    max-width: 80%;
+    padding: 12px 18px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    word-break: break-word;
+    box-shadow: var(--shadow-sm);
+}
+
+.message.sent {
+    align-self: flex-end;
+    background: linear-gradient(135deg, var(--primary), #4f46e5);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.message.received {
+    align-self: flex-start;
+    background: #334155;
+    color: var(--text);
+    border-bottom-left-radius: 4px;
+}
+
+.chat-input-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.chat-button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+textarea {
+    flex-grow: 1;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 14px;
+    color: var(--text);
+    font-family: inherit;
+    resize: none;
+    transition: all 0.2s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(15, 23, 42, 0.8);
+}
+
+button {
+    background: linear-gradient(135deg, var(--primary), #818cf8);
+    border: none;
+    border-radius: 14px;
+    padding: 14px 24px;
+    color: white;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+    filter: brightness(1.1);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+button:disabled {
+    background: #334155;
+    box-shadow: none;
+    cursor: not-allowed;
+    color: var(--text-muted);
+}
+
+#muteButton.muted {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* File Transfer Styles */
+.file-section-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: rgba(30, 41, 59, 0.4);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px dashed var(--glass-border);
+}
+
+.file-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+#fileProgress {
+    width: 100%;
+    height: 6px;
+    background: #334155;
+    border-radius: 3px;
+    overflow: hidden;
+    display: none;
+}
+
+#fileProgressInner {
+    height: 100%;
+    background: var(--primary);
+    width: 0%;
+    transition: width 0.2s;
+}
+
+/* Unified Navigation Bar (Toolbar on Desktop) */
+.mobile-nav {
+    display: flex;
+    justify-content: center;
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(16px);
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* Hide toggle buttons on desktop since sections are already visible */
+#btnToggleChat, #btnToggleFiles {
+    display: none;
+}
+
+.mobile-nav button {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+    body {
+        padding: 8px;
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    .container {
+        gap: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* PiP Layout */
+    .video-grid {
+        grid-template-columns: 1fr;
+        position: relative;
+        flex: 1;
+        min-height: 0;
+        gap: 0;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .remote-video-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        z-index: 1;
+    }
+
+    .local-video-wrapper {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        width: 80px;
+        height: 120px;
+        z-index: 10;
+        border: 2px solid var(--primary);
+        box-shadow: var(--shadow-lg);
+        border-radius: 12px;
+    }
+    
+    .local-video-wrapper span {
+        display: none;
+    }
+
+    /* Sections Toggling (As overlays) */
+    .controls {
+        position: absolute;
+        bottom: 80px; /* Above the stacked nav */
+        left: 8px;
+        right: 8px;
+        grid-template-columns: 1fr;
+        padding: 0;
+        margin-top: 0;
+        gap: 0;
+        z-index: 50;
+        border-radius: 24px;
+        pointer-events: none;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+    }
+
+    .chat-container, .chat-section {
+        pointer-events: auto;
+        background: var(--card-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 12px;
+        backdrop-filter: blur(24px);
+        box-shadow: var(--shadow-lg);
+        max-height: 50vh;
+    }
+
+    /* Hidden by default on mobile unless active */
+    .chat-container:not(.active), .chat-section:not(.active) {
+        display: none;
+    }
+
+    .chat-container.active, .chat-section.active {
+        display: flex;
+        animation: slideUp 0.3s ease-out;
+    }
+
+    .chat-messages {
+        min-height: 80px;
+        max-height: 20vh;
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .message {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    /* Stacked Navigation Bar (Not fixed) */
+    .mobile-nav {
+        display: flex;
+        position: relative;
+        bottom: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        padding: 12px 0;
+        z-index: 60;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        margin-top: 8px;
+    }
+
+    /* Show all buttons on mobile */
+    #btnToggleChat, #btnToggleFiles {
+        display: block;
+    }
+
+    .mobile-nav button {
+        flex: 1;
+        padding: 12px;
+        font-size: 0.85rem;
+        border-radius: 12px;
+    }
+
+    .mobile-nav button.active {
+        background: linear-gradient(135deg, var(--accent), #818cf8);
+        box-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
+    }
+
+    .chat-input-row {
+        gap: 8px;
+    }
+    
+    .chat-input-row textarea {
+        padding: 10px;
+        font-size: 0.85rem;
+        border-radius: 12px;
+    }
+    
+    .chat-button-group {
+        gap: 8px;
+        width: auto;
+    }
+    
+    .chat-button-group button {
+        padding: 10px 14px !important;
+        font-size: 0.8rem;
+    }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
