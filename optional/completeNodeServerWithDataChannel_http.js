@@ -2,7 +2,7 @@ var static = require('node-static');
 var http = require('http');
 
 // Create a node-static server instance
-var file = new(static.Server)('./optional');
+var file = new(static.Server)('.');
 
 var PORT = process.env.PORT || 8080;
 
