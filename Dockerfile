@@ -8,4 +8,4 @@ RUN npm install --omit=dev
 
 EXPOSE 8080
 
-CMD ["node", "optional/completeNodeServerWithDataChannel.js"]
+CMD ["node", "optional/completeNodeServerWithDataChannel_http.js"]
