@@ -1,11 +1,10 @@
 FROM rstiupm/irac_p2:2025
 
-COPY . /home/irac
-
 WORKDIR /home/irac
-
-RUN npm install --omit=dev
 
 EXPOSE 8080
 
-CMD ["node", "cap5/completeNodeServerWithDataChannel.js"]
+# Instala dependencias si no existen (cubre el caso del volume mount)
+ENTRYPOINT ["sh", "-c", "[ ! -d node_modules ] && npm init --yes && npm install socket.io node-static --omit=dev; exec \"$@\"", "--"]
+
+CMD ["node", "optional/completeNodeServerWithDataChannel.js"]
