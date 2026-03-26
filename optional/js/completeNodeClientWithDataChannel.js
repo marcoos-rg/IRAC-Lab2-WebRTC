@@ -266,8 +266,8 @@ function createPeerConnection() {
   try {
     pc = new RTCPeerConnection(pc_config, pc_constraints);
 
-    console.log("Calling pc.addStream(localStream)! Initiator: " + isInitiator);
-    pc.addStream(localStream);
+    console.log("Adding local tracks to PeerConnection! Initiator: " + isInitiator);
+    localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
 
     pc.onicecandidate = handleIceCandidate;
     console.log('Created RTCPeerConnnection with:\n' +
@@ -565,10 +565,13 @@ function setLocalAndSendMessage(sessionDescription) {
 
 function handleRemoteStreamAdded(event) {
   console.log('Remote stream added.');
-  //attachMediaStream(remoteVideo, event.streams[0]);
-  remoteVideo.srcObject = event.streams[0];
-  console.log('Remote stream attached!!.');
-  remoteStream = event.stream;
+  if (event.streams && event.streams[0]) {
+    remoteVideo.srcObject = event.streams[0];
+    remoteStream = event.streams[0];
+    console.log('Remote stream attached!!.');
+  } else {
+    console.warn('ontrack fired but event.streams is empty');
+  }
 }
 
 function handleRemoteStreamRemoved(event) {
