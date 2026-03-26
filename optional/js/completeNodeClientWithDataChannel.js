@@ -566,9 +566,12 @@ function setLocalAndSendMessage(sessionDescription) {
 function handleRemoteStreamAdded(event) {
   console.log('Remote stream added.');
   if (event.streams && event.streams[0]) {
-    remoteVideo.srcObject = event.streams[0];
-    remoteStream = event.streams[0];
-    console.log('Remote stream attached!!.');
+    if (remoteVideo.srcObject !== event.streams[0]) {
+      remoteVideo.srcObject = event.streams[0];
+      remoteStream = event.streams[0];
+      console.log('Remote stream attached!!.');
+      remoteVideo.play().catch(e => console.warn('remoteVideo.play() failed:', e));
+    }
   } else {
     console.warn('ontrack fired but event.streams is empty');
   }
