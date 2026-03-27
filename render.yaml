@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: irac-signalling-server
+    runtime: docker
+    envVars:
+      - key: PORT
+        value: 8080
+    # Render will automatically use the Dockerfile in the root

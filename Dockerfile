@@ -1,11 +1,18 @@
 FROM rstiupm/irac_p2:2025
 
-COPY . /home/irac
-
+# Create app directory
 WORKDIR /home/irac
 
-RUN npm install --omit=dev
+# Copy package.json and package-lock.json (if it exists)
+COPY package*.json ./
 
-EXPOSE 8080
+# Install dependencies defined in package.json
+RUN npm install
 
-CMD ["node", "cap5/completeNodeServerWithDataChannel.js"]
+# Bundle app source
+COPY . .
+
+# Render will use the PORT environment variable
+# If you want to use a specific port, you can set it in render.yaml
+
+CMD ["node", "optional/completeNodeServerWithDataChannel.js"]

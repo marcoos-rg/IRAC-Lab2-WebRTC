@@ -1,29 +1,19 @@
-﻿var static = require('node-static');
+var static = require('node-static');
 
-var https = require('https');
+var http = require('http');
 
-// Change directory to path of current JavaScript program
-// var process = require('process');
-// process.chdir(__dirname);
-//descomentar las dos líneas anteriores si no se quiere poner el subdirectorio al final, por ej. https://...:8080/cap5/
+// Use the PORT environment variable provided by Render, or default to 8080
+var port = process.env.PORT || 8080;
 
-// Read key and certificates required for https
-var fs = require('fs');
-var path = require('path');
-
-var options = {
-  key: fs.readFileSync(path.join(__dirname,'key.pem')),
-  //key: fs.readFileSync(path.join(__dirname,'key.pem')),
-  cert: fs.readFileSync(path.join(__dirname,'cert.pem'))
-};
 // Create a node-static server instance
 var file = new(static.Server)();
 
-// We use the http moduleÕs createServer function and
-// rely on our instance of node-static to serve the files
-var app = https.createServer(options, function (req, res) {
+// We use the http module's createServer function
+var app = http.createServer(function (req, res) {
   file.serve(req, res);
-}).listen(8080, '0.0.0.0', () => { console.log('>>> Signalling server is listening on https://localhost:8080') });
+}).listen(port, '0.0.0.0', () => { 
+  console.log('>>> Signalling server is listening on port ' + port);
+});
 
 // Use socket.io JavaScript library for real-time web applications
 var io = require('socket.io')(app);
